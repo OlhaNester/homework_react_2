@@ -7,20 +7,25 @@ class App extends Component {
     neutral: 0,
     bad: 0,
   };
+
+  // handleChange = (event) => {
+  //   this.setState((prevState) => ({
+  //     [event.target.name]: prevState[event.target.name] + 1,
+  //   }));
+  // };
   handleGood = () => {
-    this.setState(prevState => {
+   
+     this.setState(prevState => {
       return {
         good: prevState.good + 1,
-      };
+              };
     });
   };
 
-  handleNeutral = (event) => {
-    console.log(event.target.name);
-    this.setState(prevState => {
+  handleNeutral = () => {
+        this.setState(prevState => {
       return {
-        neutral: prevState.neutral + 1,
-        
+        neutral: prevState.neutral + 1,        
       };
     });
   };
@@ -32,12 +37,16 @@ class App extends Component {
       };
     });
   };
-  countTotalFeedback = () => {
+  
+  
+  render() {
+    const countTotalFeedback =
     Object.values(this.state).reduce(function (a, b) {
       return a + b
-          });
-  }
-  render() {
+    });
+    
+    const percentageGood = Math.round((this.state.good / countTotalFeedback) * 100);
+
   return (
     <div className="App">
       <h1>Please leave feedback </h1>
@@ -52,8 +61,8 @@ class App extends Component {
           <p>Good: { this.state.good}</p>
           <p>Neutral:{ this.state.neutral}</p>
           <p>Bad:{ this.state.bad}</p>
-          <p>Total:{ }</p>
- <p>Positive Feedback:</p>
+          <p>Total:{ countTotalFeedback}</p>
+          <p>Positive Feedback: { percentageGood}</p>
         </div>
       </div>
       
