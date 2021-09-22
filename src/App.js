@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FeedbackOptions from "./Component/FeedbackOptions/FeedbackOptions";
+// import FeedbackOptions from "./components/FeedbackOptions";
 
 class App extends Component {
   state = {
@@ -8,31 +8,10 @@ class App extends Component {
     bad: 0,
   };
 
-  // handleChange = (event) => {
-  //   this.setState((prevState) => ({
-  //     [event.target.name]: prevState[event.target.name] + 1,
-  //   }));
-  // };
-  handleGood = () => {
+  handleChange = (event) => {
     this.setState((prevState) => {
       return {
-        good: prevState.good + 1,
-      };
-    });
-  };
-
-  handleNeutral = () => {
-    this.setState((prevState) => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-  };
-
-  handleBad = () => {
-    this.setState((prevState) => {
-      return {
-        bad: prevState.bad + 1,
+        [event.target.name]: prevState[event.target.name] + 1,
       };
     });
   };
@@ -47,7 +26,18 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Please leave feedback </h1>
-        <FeedbackOptions />
+        <div>
+          <button type="button" name="good" onClick={this.handleChange}>
+            Good
+          </button>
+          <button type="button" name="neutral" onClick={this.handleChange}>
+            Neutral
+          </button>
+          <button type="button" name="bad" onClick={this.handleChange}>
+            Bad
+          </button>
+        </div>
+        ;
         <div>
           <h1>Statistics</h1>
           <div>
