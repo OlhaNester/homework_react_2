@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-// import FeedbackOptions from "./components/FeedbackOptions";
+import FeedbackOptions from "./components/FeedbackOptions";
+import Section from "./components/Section";
+import Statistics from "./components/Statistics";
+import Notification from "./components/Notification";
+
+import './App.css';
 
 class App extends Component {
   state = {
@@ -17,40 +22,31 @@ class App extends Component {
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
     const total = Object.values(this.state).reduce(function (a, b) {
       return a + b;
     });
 
     const positivePercentage = Math.round((this.state.good / total) * 100);
 
+    const options = Object.keys(this.state);
+
     return (
       <div className="App">
-        <h1>Please leave feedback </h1>
-        <div>
-          <button type="button" name="good" onClick={this.handleChange}>
-            Good
-          </button>
-          <button type="button" name="neutral" onClick={this.handleChange}>
-            Neutral
-          </button>
-          <button type="button" name="bad" onClick={this.handleChange}>
-            Bad
-          </button>
+        <p className="doyoulike"> Do you like our coffee?</p>
+        <Section title={"Please leave feedback"} >
+        
+        <FeedbackOptions options={options} onLeaveFeedback={this.handleChange} />
+        </Section>
+        <Section title={"Statistics"} >
+           {total===0 ? (<Notification message="No feedback given"/>):
+           (<Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={positivePercentage}></Statistics>) }
+        
+        </Section>
+       
         </div>
-        ;
-        <div>
-          <h1>Statistics</h1>
-          <div>
-            <p>Good: {this.state.good}</p>
-            <p>Neutral:{this.state.neutral}</p>
-            <p>Bad:{this.state.bad}</p>
-            <p>Total:{total}</p>
-            <p>Positive Feedback: {positivePercentage}%</p>
-          </div>
-        </div>
-      </div>
     );
   }
-}
+};
 
 export default App;

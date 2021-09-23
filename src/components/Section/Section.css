@@ -1,0 +1,10 @@
+.Section {
+  display: inline;
+  text-align: center;
+}
+
+.title {
+  color: antiquewhite;
+  font-size: 26px;
+  font-weight: 500;
+}
